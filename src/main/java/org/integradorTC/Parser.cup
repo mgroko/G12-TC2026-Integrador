@@ -1,0 +1,111 @@
+/* ============ SECCIÓN 1: DECLARACIONES ============ */
+
+import java.io.*;
+import java_cup.runtime.*;
+
+/* Símbolos terminales (tokens del Lexer) */
+terminal TOK_CLASS, TOK_NEW, TOK_THIS, TOK_INT, TOK_BOOL, TOK_STRING, TOK_VOID,
+         TOK_RETURN, TOK_IF, TOK_ELSE, TOK_WHILE, TOK_TRUE, TOK_FALSE, TOK_ANIMALPRINT,
+         TOK_LLAVEABRE, TOK_LLAVECIERRA, TOK_PARENTABRE, TOK_PARENTCIERRA,
+         TOK_CORCHABRE, TOK_CORCHIERRA, TOK_COMILLAS, TOK_PUNTO, TOK_ASIGNACION,
+         TOK_IGUAL, TOK_DISTINTO, TOK_MAYOR, TOK_MENOR, TOK_MAYORIGUAL, TOK_MENORIGUAL,
+         TOK_MAS, TOK_MENOS, TOK_MULTIPLICA, TOK_DIVIDE, TOK_COMA, TOK_FINAL;
+
+terminal String TOK_NUM, TOK_TEXTO, TOK_ID, TOK_IDCLASE;
+
+/* Símbolos no-terminales */
+non terminal programa, clase, miembros, miembro, tipo, parametros;
+non terminal lista_parametros, cuerpo_metodo, sentencias_metodo, sentencia_metodo;
+non terminal asignacion, retorno, referencia, sentencias_principales;
+non terminal sentencia, instanciacion, llamada_met_sent, impresion;
+non terminal bifurcacion, bucle, condicion, lista_argumentos, argumentos, expresion, valor;
+
+/* ============ PRECEDENCIA Y ASOCIATIVIDAD ============ */
+precedence left TOK_MAS, TOK_MENOS;
+precedence left TOK_MULTIPLICA, TOK_DIVIDE;
+
+/* ============ SECCIÓN 2: REGLAS GRAMATICALES ============ */
+
+programa ::= clase sentencias_principales ;
+
+clase ::= TOK_CLASS TOK_IDCLASE TOK_LLAVEABRE miembros TOK_LLAVECIERRA TOK_FINAL ;
+
+miembros ::= miembro
+           | miembros miembro ;
+
+miembro ::= tipo TOK_ID TOK_FINAL
+          | tipo TOK_ID TOK_PARENTABRE parametros TOK_PARENTCIERRA TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA
+          | TOK_VOID TOK_ID TOK_PARENTABRE parametros TOK_PARENTCIERRA TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA ;
+
+tipo ::= TOK_INT
+       | TOK_STRING
+       | TOK_BOOL ;
+
+parametros ::= lista_parametros
+             | /* vacio */ ;
+
+lista_parametros ::= tipo TOK_ID
+                   | tipo TOK_ID TOK_COMA lista_parametros ;
+
+cuerpo_metodo ::= sentencias_metodo
+                | /* vacio */ ;
+
+sentencias_metodo ::= sentencia_metodo
+                    | sentencias_metodo sentencia_metodo ;
+
+sentencia_metodo ::= asignacion
+                   | retorno
+                   | bifurcacion
+                   | bucle ;
+
+asignacion ::= referencia TOK_ASIGNACION expresion TOK_FINAL ;
+
+retorno ::= TOK_RETURN expresion TOK_FINAL ;
+
+bifurcacion ::= TOK_IF TOK_PARENTABRE condicion TOK_PARENTCIERRA TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA
+              | TOK_IF TOK_PARENTABRE condicion TOK_PARENTCIERRA TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA TOK_ELSE TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA ;
+
+bucle ::= TOK_WHILE TOK_PARENTABRE condicion TOK_PARENTCIERRA TOK_LLAVEABRE cuerpo_metodo TOK_LLAVECIERRA ;
+
+condicion ::= expresion TOK_IGUAL expresion
+            | expresion TOK_DISTINTO expresion
+            | expresion TOK_MAYOR expresion
+            | expresion TOK_MENOR expresion
+            | expresion TOK_MAYORIGUAL expresion
+            | expresion TOK_MENORIGUAL expresion ;
+
+referencia ::= TOK_ID
+             | TOK_THIS TOK_PUNTO TOK_ID
+             | TOK_ID TOK_CORCHABRE expresion TOK_CORCHIERRA ;
+
+sentencias_principales ::= sentencia
+                         | sentencias_principales sentencia ;
+
+sentencia ::= instanciacion
+            | llamada_met_sent
+            | impresion ;
+
+instanciacion ::= TOK_IDCLASE TOK_ID TOK_ASIGNACION TOK_NEW TOK_IDCLASE TOK_PARENTABRE TOK_PARENTCIERRA TOK_FINAL ;
+
+llamada_met_sent ::= TOK_ID TOK_PUNTO TOK_ID TOK_PARENTABRE argumentos TOK_PARENTCIERRA TOK_FINAL ;
+
+impresion ::= TOK_ANIMALPRINT TOK_PARENTABRE expresion TOK_PARENTCIERRA TOK_FINAL ;
+
+argumentos ::= lista_argumentos
+             | /* vacio */ ;
+
+lista_argumentos ::= expresion
+                   | expresion TOK_COMA lista_argumentos ;
+
+expresion ::= expresion TOK_MAS expresion
+            | expresion TOK_MENOS expresion
+            | expresion TOK_MULTIPLICA expresion
+            | expresion TOK_DIVIDE expresion
+            | valor ;
+
+valor ::= TOK_TEXTO
+        | TOK_NUM
+        | TOK_TRUE
+        | TOK_FALSE
+        | referencia
+        | TOK_ID TOK_PUNTO TOK_ID TOK_PARENTABRE argumentos TOK_PARENTCIERRA ;
