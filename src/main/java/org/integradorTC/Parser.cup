@@ -3,6 +3,17 @@
 import java.io.*;
 import java_cup.runtime.*;
 
+// sobreescribimos metodos para manejar errores y que se puedan imprimir en la consola del mini-ide
+parser code {:
+    public void syntax_error(Symbol s) {
+        // Se deja vacío intencionalmente
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+        String lexema = (s.value != null) ? s.value.toString() : "Símbolo " + s.sym;
+        throw new Exception("Error Sintáctico: Estructura inesperada cerca de '" + lexema + "' en la línea " + (s.left + 1) + ", columna " + (s.right + 1));
+    }
+:}
+
 /* Símbolos terminales (tokens del Lexer) */
 terminal TOK_CLASS, TOK_NEW, TOK_THIS, TOK_INT, TOK_BOOL, TOK_STRING, TOK_VOID,
          TOK_RETURN, TOK_IF, TOK_ELSE, TOK_WHILE, TOK_TRUE, TOK_FALSE, TOK_ANIMALPRINT,

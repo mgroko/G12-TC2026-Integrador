@@ -90,6 +90,8 @@ IDCLASE = [A-Z]+
 [ \t\r\n\f]      { /* ignorar */ }
 
 /* Error en token desconocido */
-.                { System.err.println("Token desconocido: " + yytext()); }
+. {
+    throw new RuntimeException("Error Léxico: Símbolo no reconocido '" + yytext() + "' en la línea " + (yyline + 1) + ", columna " + (yycolumn + 1));
+}
 
 

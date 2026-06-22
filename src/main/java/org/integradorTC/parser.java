@@ -6,7 +6,6 @@ package org.integradorTC;
 import java.io.*;
 import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
-import org.integradorTC.sym;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -307,8 +306,13 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 
-    // esta variable sirve para ir guardando lo que se tenga que imprimir con animalprint
-    public String consolaVirtual = "";
+    public void syntax_error(Symbol s) {
+        // Se deja vacío intencionalmente
+    }
+    public void unrecovered_syntax_error(Symbol s) throws java.lang.Exception {
+        String lexema = (s.value != null) ? s.value.toString() : "Símbolo " + s.sym;
+        throw new Exception("Error Sintáctico: Estructura inesperada cerca de '" + lexema + "' en la línea " + (s.left + 1) + ", columna " + (s.right + 1));
+    }
 
 
 /** Cup generated class to encapsulate user supplied action code.*/

@@ -785,7 +785,7 @@ public class Lexer implements java_cup.runtime.Scanner {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1:
-            { System.err.println("Token desconocido: " + yytext());
+            { throw new RuntimeException("Error Léxico: Símbolo no reconocido '" + yytext() + "' en la línea " + (yyline + 1) + ", columna " + (yycolumn + 1));
             }
           // fall through
           case 42: break;

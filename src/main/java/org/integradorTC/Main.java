@@ -17,7 +17,11 @@ public class Main extends Application {
 
         // carga la escena principal
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/PantallaIDE.fxml"));
-        scene = new Scene(fxmlLoader.load(), 925, 610);
+        scene = new Scene(fxmlLoader.load(), 901, 601);
+
+        stage.setTitle("Mini-IDE - Analizador Léxico y Sintáctico");
+        stage.setResizable(false);
+
         stage.setScene(scene);
         stage.show();
     }

@@ -86,7 +86,7 @@ public class PantallaIDE {
             txt_salida.appendText(">> Análisis completado con éxito.");
 
         } catch (Exception e) {
-            txt_salida.appendText(">> [ERROR SINTÁCTICO / LÉXICO]: " + e.getMessage() + "\n");
+            txt_salida.appendText(">> [ERROR SINTÁCTICO / LÉXICO]: \n" + e.getMessage() + "\n");
             txt_salida.appendText(">> Análisis abortado debido a fallas estructurales en el código fuente.");
         }
     }
