@@ -6,6 +6,7 @@ package org.integradorTC;
 import java.io.*;
 import java_cup.runtime.*;
 import java_cup.runtime.XMLElement;
+import org.integradorTC.sym;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
   */
@@ -303,6 +304,11 @@ public class parser extends java_cup.runtime.lr_parser {
 
   /** <code>error</code> Symbol index. */
   public int error_sym() {return 1;}
+
+
+
+    // esta variable sirve para ir guardando lo que se tenga que imprimir con animalprint
+    public String consolaVirtual = "";
 
 
 /** Cup generated class to encapsulate user supplied action code.*/

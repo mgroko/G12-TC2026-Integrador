@@ -22,8 +22,7 @@ non terminal programa, clase, miembros, miembro, tipo, parametros;
 non terminal lista_parametros, cuerpo_metodo, sentencias_metodo, sentencia_metodo;
 non terminal asignacion, retorno, referencia, sentencias_principales;
 non terminal sentencia, instanciacion, llamada_met_sent, impresion;
-non terminal bifurcacion, bucle, condicion, lista_argumentos, argumentos;
-non terminal Object expresion, valor;
+non terminal bifurcacion, bucle, condicion, lista_argumentos, argumentos, expresion, valor;
 
 /* ============ PRECEDENCIA Y ASOCIATIVIDAD ============ */
 precedence left TOK_MAS, TOK_MENOS;
