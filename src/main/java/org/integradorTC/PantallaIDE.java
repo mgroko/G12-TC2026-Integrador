@@ -15,7 +15,6 @@ import java.io.IOException;
 
 public class PantallaIDE {
 
-    // Vincular los componentes del FXML usando @FXML y el fx:id exacto
     @FXML
     private Button btn_cargar;
 
@@ -72,24 +71,21 @@ public class PantallaIDE {
         // convierte el string del editor en un flujo legible por los analizadores
         StringReader reader = new StringReader(codigoFuente);
 
-        // 2. Instanciar el Analizador Léxico (generado por JFlex) pasándole el lector
-        Lexer lexer = new Lexer(reader); // Asegurarse de que el nombre coincida con su clase JFlex [cite: 745]
+        // instancia el analizador lexico (generado por JFlex)
+        Lexer lexer = new Lexer(reader);
 
-        // 3. Instanciar el Analizador Sintáctico (generado por CUP) pasándole el Lexer [cite: 872, 879]
-        parser parserSintactico = new parser(lexer); // Asegurarse de que el nombre coincida con su clase CUP [cite: 872]
+        // instancia el analizador sintáctico (generado por CUP)
+        parser parserSintactico = new parser(lexer);
 
         try {
             txt_salida.setText("Iniciando análisis léxico y sintáctico...\n");
 
-            // Disparar el parseo sintáctico (que consume los tokens del lexer automáticamente)
             parserSintactico.parse();
 
-            // Si el metodo parse() no arroja ninguna excepción, el programa es legal
             txt_salida.appendText(">> [ÉXITO] El programa cumple con las reglas sintácticas del lenguaje.\n");
-            txt_salida.appendText(">> Análisis completado con éxito. ¡Sintaxis Válida!");
+            txt_salida.appendText(">> Análisis completado con éxito.");
 
         } catch (Exception e) {
-            // Capturar y mostrar los errores en la consola inferior
             txt_salida.appendText(">> [ERROR SINTÁCTICO / LÉXICO]: " + e.getMessage() + "\n");
             txt_salida.appendText(">> Análisis abortado debido a fallas estructurales en el código fuente.");
         }
