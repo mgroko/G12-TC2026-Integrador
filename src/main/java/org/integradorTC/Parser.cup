@@ -3,10 +3,6 @@
 import java.io.*;
 import java_cup.runtime.*;
 
-parser code {:
-    // esta variable sirve para ir guardando lo que se tenga que imprimir con animalprint
-    public String consolaVirtual = "";
-:}
 /* Símbolos terminales (tokens del Lexer) */
 terminal TOK_CLASS, TOK_NEW, TOK_THIS, TOK_INT, TOK_BOOL, TOK_STRING, TOK_VOID,
          TOK_RETURN, TOK_IF, TOK_ELSE, TOK_WHILE, TOK_TRUE, TOK_FALSE, TOK_ANIMALPRINT,
