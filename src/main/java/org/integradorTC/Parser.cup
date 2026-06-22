@@ -3,6 +3,10 @@
 import java.io.*;
 import java_cup.runtime.*;
 
+parser code {:
+    // esta variable sirve para ir guardando lo que se tenga que imprimir con animalprint
+    public String consolaVirtual = "";
+:}
 /* Símbolos terminales (tokens del Lexer) */
 terminal TOK_CLASS, TOK_NEW, TOK_THIS, TOK_INT, TOK_BOOL, TOK_STRING, TOK_VOID,
          TOK_RETURN, TOK_IF, TOK_ELSE, TOK_WHILE, TOK_TRUE, TOK_FALSE, TOK_ANIMALPRINT,
@@ -18,7 +22,8 @@ non terminal programa, clase, miembros, miembro, tipo, parametros;
 non terminal lista_parametros, cuerpo_metodo, sentencias_metodo, sentencia_metodo;
 non terminal asignacion, retorno, referencia, sentencias_principales;
 non terminal sentencia, instanciacion, llamada_met_sent, impresion;
-non terminal bifurcacion, bucle, condicion, lista_argumentos, argumentos, expresion, valor;
+non terminal bifurcacion, bucle, condicion, lista_argumentos, argumentos;
+non terminal Object expresion, valor;
 
 /* ============ PRECEDENCIA Y ASOCIATIVIDAD ============ */
 precedence left TOK_MAS, TOK_MENOS;
