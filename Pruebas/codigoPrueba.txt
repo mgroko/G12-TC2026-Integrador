@@ -1,0 +1,11 @@
+class CALCULADORA {
+    int resultado!
+
+    int sumar(int a, int b) {
+        this.resultado = a + b!
+        return this.resultado!
+    }
+}!
+
+CALCULADORA miCalc = new CALCULADORA()!
+animalprint(miCalc.sumar(10, 5))!

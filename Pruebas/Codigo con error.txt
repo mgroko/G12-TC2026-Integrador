@@ -1,0 +1,26 @@
+Codigo con error léxico
+
+class CALCULADORA {
+    int resultado!
+
+    void sumar(int a) {
+        this.resultado = a + 10!
+        
+        # Esto va a romper el lexer porque el hashtag no existe
+        animalprint(this.resultado)!
+    }
+}!
+
+Código con error sintactico 
+
+class CALCULADORA {
+    int resultado!
+
+    void verificar() {
+        this.resultado = 100!
+        
+        if this.resultado >> 50 { 
+            this.resultado = 0!
+        }
+    }
+}!

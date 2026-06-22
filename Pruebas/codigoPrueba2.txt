@@ -1,0 +1,27 @@
+class ALGORITMO {
+    int acumulador!
+    bool esMayor!
+
+    void procesar(int valor) {
+        if (valor >> 10) {
+            this.esMayor = true!
+        } else {
+            this.esMayor = false!
+        }
+        
+        this.acumulador = 0!
+        
+        while (this.acumulador << valor) {
+            this.acumulador = this.acumulador + 1!
+        }
+    }
+    
+    int obtenerResultado() {
+        return this.acumulador!
+    }
+}!
+
+ALGORITMO miObjeto = new ALGORITMO()!
+miObjeto.procesar(15)!
+animalprint(miObjeto.obtenerResultado())!
+animalprint("Analisis estructural finalizado")!
