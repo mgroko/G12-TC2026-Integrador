@@ -94,4 +94,10 @@ public class PantallaIDE {
             txt_salida.appendText(">> Análisis abortado debido a fallas estructurales en el código fuente.");
         }
     }
+    // lógica para borrar la consola
+    @FXML
+    void limpiarTodo(ActionEvent event) {
+        txt_salida.clear();
+        txt_entrada.clear();
+    }
 }
